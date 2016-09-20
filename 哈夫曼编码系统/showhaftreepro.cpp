@@ -33,7 +33,12 @@ void ShowHafTreePro::showNewHeap(QMap<QChar, qint32> *m)
     }
     qDebug()<<"show heap run";
     //goNext();
-    for(qint32 i =1;i<=heap->length();i++)  nextstep(heap->at(i),0,colum+1);
+    for(qint32 i =1;i<=heap->length();i++)
+    {
+        int t = colum;
+        nextstep(heap->at(i),0,colum+1);
+        ui->tableWidget->item(0,t+1)->setBackgroundColor(Qt::red);
+    }
     if(heap->length()==1)
     {
         ui->But_next->setEnabled(false);
@@ -62,7 +67,12 @@ void ShowHafTreePro::goNext()
     heap->insert(parent);
 
     ui->tableWidget->clear();
-    for(qint32 i =1;i<=heap->length();i++)  nextstep(heap->at(i),0,colum+1);
+    for(qint32 i =1;i<=heap->length();i++)
+    {
+        int t = colum;
+        nextstep(heap->at(i),0,colum+1);
+        ui->tableWidget->item(0,t+1)->setBackgroundColor(Qt::red);
+    }
     if(heap->length()==1)
     {
         ui->But_next->setEnabled(false);
@@ -79,7 +89,7 @@ void ShowHafTreePro::nextstep(Node *node, int i,int j)
     if(node->left)
     {
         ui->tableWidget->setItem(i,j,new QTableWidgetItem(QString::number(node->weight,10)));
-        ui->tableWidget->item(i,j)->setBackgroundColor(QColor(Qt::green));
+        ui->tableWidget->item(i,j)->setBackgroundColor(QColor(Qt::yellow));
         nextstep(node->left,i+2,j);
         paintVerLine(j,i,i+2);
         int t=std::max(j+2,maxj);
@@ -88,7 +98,7 @@ void ShowHafTreePro::nextstep(Node *node, int i,int j)
     }
     else{
         ui->tableWidget->setItem(i,j,new QTableWidgetItem(node->value));
-        ui->tableWidget->item(i,j)->setBackgroundColor(QColor(Qt::yellow));
+        ui->tableWidget->item(i,j)->setBackgroundColor(QColor(Qt::green));
         maxj = j+2;
     }
      ui->tableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
@@ -97,9 +107,14 @@ void ShowHafTreePro::nextstep(Node *node, int i,int j)
 void ShowHafTreePro::paintHorLine(int i, int j1, int j2)
 {
    if(j2>=colum) {ui->tableWidget->setColumnCount(j2+1);colum = j2+1;}
-   ui->tableWidget->setItem(i,j1+1,new QTableWidgetItem("--1--"));
+   ui->tableWidget->setItem(i,j1+1,new QTableWidgetItem("-1-"));
+   ui->tableWidget->item(i,j1+1)->setTextAlignment(Qt::AlignCenter);
    qDebug()<<"paint Hor "<<i<<" "<<j1<<"to"<<j2;
-    for(j1+=2;j1<j2;j1++)  ui->tableWidget->setItem(i,j1,new QTableWidgetItem("-----"));
+    for(j1+=2;j1<j2;j1++)
+    {
+        ui->tableWidget->setItem(i,j1,new QTableWidgetItem("---"));
+        ui->tableWidget->item(i,j1)->setTextAlignment(Qt::AlignCenter);
+    }
 
 }
 
@@ -123,7 +138,7 @@ void ShowHafTreePro::on_But_close_clicked()
 
 void ShowHafTreePro::on_But_autoNext_clicked()
 {
-    timer->start(ui->Slider_speed->value());
+    timer->start(2050-ui->Slider_speed->value());
     ui->But_autoNext->setEnabled(false);
     ui->But_next->setEnabled(false);
 }
@@ -141,7 +156,7 @@ void ShowHafTreePro::slideValueChanged()
     if(timer->isActive())
     {
         timer->stop();
-        timer->start(ui->Slider_speed->value());
+        timer->start(2050-ui->Slider_speed->value());
     }
 }
 

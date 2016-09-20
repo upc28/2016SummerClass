@@ -22,7 +22,7 @@ void ShowHafTree::nextstep(Node *node, int i,int j)
     if(node->left)
     {
         ui->tableWidget->setItem(i,j,new QTableWidgetItem(QString::number(node->weight,10)));
-        ui->tableWidget->item(i,j)->setBackgroundColor(QColor(Qt::green));
+        ui->tableWidget->item(i,j)->setBackgroundColor(QColor(Qt::yellow));
         nextstep(node->left,i+2,j);
         paintVerLine(j,i,i+2);
         int t=std::max(j+2,maxj);
@@ -31,7 +31,7 @@ void ShowHafTree::nextstep(Node *node, int i,int j)
     }
     else{
         ui->tableWidget->setItem(i,j,new QTableWidgetItem(node->value));
-        ui->tableWidget->item(i,j)->setBackgroundColor(QColor(Qt::yellow));
+        ui->tableWidget->item(i,j)->setBackgroundColor(QColor(Qt::green));
         maxj = j+2;
     }
      ui->tableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
@@ -40,9 +40,14 @@ void ShowHafTree::nextstep(Node *node, int i,int j)
 void ShowHafTree::paintHorLine(int i, int j1, int j2)
 {
    if(j2>=colum) {ui->tableWidget->setColumnCount(j2+1);colum = j2+1;}
-   ui->tableWidget->setItem(i,j1+1,new QTableWidgetItem("--1--"));
+   ui->tableWidget->setItem(i,j1+1,new QTableWidgetItem("-1-"));
+   ui->tableWidget->item(i,j1+1)->setTextAlignment(Qt::AlignCenter);
    qDebug()<<"paint Hor "<<i<<" "<<j1<<"to"<<j2;
-    for(j1+=2;j1<j2;j1++)  ui->tableWidget->setItem(i,j1,new QTableWidgetItem("-----"));
+    for(j1+=2;j1<j2;j1++)
+    {
+        ui->tableWidget->setItem(i,j1,new QTableWidgetItem("---"));
+        ui->tableWidget->item(i,j1)->setTextAlignment(Qt::AlignCenter);
+    }
 
 }
 
@@ -61,6 +66,7 @@ void ShowHafTree::showNewTree(Node *node)
     ui->tableWidget->setRowCount(1);
     row = 1;colum = 1;
     nextstep(node,0,0);
+    ui->tableWidget->item(0,0)->setBackgroundColor(Qt::red);
 }
 
 void ShowHafTree::on_pushButton_clicked()

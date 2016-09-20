@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>哈夫曼树生成过程</string>
+   <string>哈夫曼树生成过程(红:根节点，黄:分支节点，绿:叶节点)</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -133,8 +133,11 @@
        <property name="pageStep">
         <number>50</number>
        </property>
+       <property name="value">
+        <number>1300</number>
+       </property>
        <property name="sliderPosition">
-        <number>750</number>
+        <number>1300</number>
        </property>
        <property name="tracking">
         <bool>false</bool>

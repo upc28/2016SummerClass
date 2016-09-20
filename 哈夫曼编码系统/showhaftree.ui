@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>哈夫曼树</string>
+   <string>哈夫曼树(红:根节点，黄:分支节点，绿:叶节点)</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
