@@ -27,13 +27,15 @@ private slots:
 
     void slotShow();
 
-    void getConnection();
+    void readSocket();
 
 private:
     Ui::StartScreen *ui;
     PrivateScreen* priWin;
     QTcpServer* tcpserver;
     QTcpSocket* tcpsocket;
+    QTcpSocket* tcpsocket1;
+    void receiveConnection();
 };
 
 #endif // STARTSCREEN_H

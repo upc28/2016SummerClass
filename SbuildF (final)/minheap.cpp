@@ -10,18 +10,8 @@ MinHeap::MinHeap(int length)
 void MinHeap::display()
 {
    qDebug()<<"display:";
-   for(int i=1;i<=num;i++)
+    for(int i=1;i<=num;i++)
         qDebug()<<heap[i]->weight;
-}
-
-qint32 MinHeap::length()
-{
-    return num;
-}
-
-Node* MinHeap::at(qint32 i)
-{
-    return heap[i];
 }
 
 void MinHeap::insert(Node* node)
@@ -43,6 +33,14 @@ Node* MinHeap::reMini()
    siftDown(1,num);
    return heap[num+1];
 }
+/*MinHeap::~MinHeap()
+{
+    for(int i=0;i<=maxLength;i++)
+    {
+        delete heap[i];
+    }
+    delete heap;
+}*/
 
 void MinHeap::siftDown(int start, int end)
 {

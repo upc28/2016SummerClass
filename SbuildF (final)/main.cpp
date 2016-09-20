@@ -8,17 +8,18 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //PrivateScreen w;
+    PrivateScreen w;
    // Widget w(0,12345);
     //HafDisplay w;
-    StartScreen w,m;
+    //StartScreen w;
     //system("pause");
     //Widget h(0,54321);
     //h.show();
     QDesktopWidget* desktopwight = QApplication::desktop();
     QRect screenRect = desktopwight->availableGeometry();
-    m.show();
+
     w.move(screenRect.width()*2/3,0);
     w.show();
+
     return a.exec();
 }

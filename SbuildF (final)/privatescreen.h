@@ -8,16 +8,6 @@
 #include <QTime>
 #include <QtNetwork/QTcpSocket>
 #include <QtNetwork/QTcpServer>
-#include <QVector>
-
-struct TreeN{
-    QChar data;
-    qint32 left,right;
-    /*TreeN(QChar a,qint16 b,qint16 c){
-        data = a;left = b; right = c;
-    }*/
-};
-
 
 namespace Ui {
 class PrivateScreen;
@@ -28,7 +18,7 @@ class PrivateScreen : public QWidget
     Q_OBJECT
 
 public:
-    explicit PrivateScreen(QTcpSocket* socket,QWidget *parent = 0);
+    explicit PrivateScreen(QString addr=QString("127.0.0.1"),QWidget *parent = 0);
     ~PrivateScreen();
 
 
@@ -41,27 +31,19 @@ private slots:
 
     void on_But_history_clicked();
 
-    void Socket_sendMsg();
-
-   void readMsg();
+   // void readMsg();
 
 private:
     Ui::PrivateScreen *ui;
     Node* parent;
-    HafDisplay *hafWin;
-    HistoryDisplay *hisWin;
-    QMap<QChar,qint32>* map;
+    HafDisplay hafWin;
+    HistoryDisplay hisWin;
+    QMap<QChar,qint16>* map;
     QMap<QChar,QString>* hafMap;
-    QTcpSocket* tcpsocket;
-    QString hafStr;
+    //QTcpSocket* tcpsocket;
     void buildHafCode(Node* node,QString str);
     void toHaf(QString gettext);
     void toHistory(QString str);
-    void sendMsg(QString str);
-    TreeN* hafArray;
-    void sendHaf();
-    //void sendHafCode();
-    void haftoVector(Node* node,int i);
     //bool cmp(const Record &a,const Record &b);
 };
 

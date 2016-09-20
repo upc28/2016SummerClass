@@ -2,7 +2,6 @@
 #define HISTORYDISPLAY_H
 
 #include <QWidget>
-#include "showhaftree.h"
 
 namespace Ui {
 class HistoryDisplay;
@@ -22,7 +21,6 @@ private slots:
 
 private:
     Ui::HistoryDisplay *ui;
-
 };
 
 #endif // HISTORYDISPLAY_H

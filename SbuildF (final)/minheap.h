@@ -8,17 +8,16 @@ using namespace std;
 
 struct Node{
     QChar value;
-    qint32 weight;
-    qint32 loc;
+    qint16 weight;
     Node* left;Node* right;
     Node(){
         left = NULL;right=NULL;
     }
-    Node(QChar a,qint32 b){
+    Node(QChar a,qint16 b){
         value = a;weight =b;
         left = NULL;right=NULL;
     }
-    Node(qint32 b){
+    Node(qint16 b){
         weight =b;
         left = NULL;right=NULL;
     }
@@ -33,11 +32,10 @@ public:
     Node* reMini();
     bool isEmpty();
     void display();
-    qint32 length();
-    Node* at(qint32 i);
+
 private:
     Node** heap;
-    qint32 num;
+    qint16 num;
     int maxLength;
     void siftDown(int start,int end);
     void createHeap();
